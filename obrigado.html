@@ -101,6 +101,15 @@
     .hero-confirm{padding:44px 0 30px;}
   }
 </style>
+<script>
+  (function() {
+    var CHAVE_VALIDA = '78456';
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('chave') !== CHAVE_VALIDA) {
+      window.location.replace('index.html');
+    }
+  })();
+</script>
 </head>
 <body>
 
