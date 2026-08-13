@@ -527,7 +527,7 @@
           <img src="amostra.png" alt="Mundo Colorido — Bíblia Infantil Ilustrada" style="width:100%;height:auto;display:block;">
           <span style="position:absolute;top:8%;right:6%;font-family:'Space Mono',monospace;font-size:11px;font-weight:700;text-transform:uppercase;background:#22a65e;color:#fff;padding:4px 12px;border-radius:20px;box-shadow:0 3px 8px rgba(0,0,0,0.3);transform:rotate(8deg);">5 Bônus</span>
           <div style="position:absolute;bottom:2%;right:-2%;width:30%;height:14px;background:radial-gradient(ellipse at center, rgba(0,0,0,0.38) 0%, rgba(0,0,0,0.18) 55%, transparent 80%);border-radius:50%;z-index:4;filter:blur(2px);"></div>
-          <img src="celular.jpeg" alt="Leia no celular" style="position:absolute;bottom:8%;right:-8%;width:34%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.35));z-index:5;animation:floatPhone 3.2s ease-in-out infinite;">
+          <img src="celular.png" alt="Leia no celular" style="position:absolute;bottom:8%;right:-8%;width:34%;height:auto;filter:drop-shadow(0 10px 18px rgba(0,0,0,0.35));z-index:5;animation:floatPhone 3.2s ease-in-out infinite;">
         </div>
         <div class="tag-name" style="text-align:center;">COMPRE 1 E LEVE 6 <span style="display:block;font-size:0.6em;font-weight:500;">(1 Bíblia + 5 bônus exclusivos)</span></div>
         <div style="max-width:250px;margin:10px auto 0;text-align:left;">
@@ -1509,6 +1509,7 @@
       var prevBtn = document.getElementById('carrosselPrev');
       var nextBtn = document.getElementById('carrosselNext');
       var counter = document.getElementById('pageCounter');
+      if (!slides.length || !counter) return;
       var currentIndex = 0;
       var totalSlides = slides.length;
       var isAnimating = false;
