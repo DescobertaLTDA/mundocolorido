@@ -332,7 +332,8 @@
       modalImg.src = url;
       modalImg.alt = nome;
       modalTitulo.textContent = nome;
-      modalBaixar.href = url;
+      // URL para download com ?download=
+      modalBaixar.href = url + '?download=';
       modalBaixar.download = nomeArquivo;
       modal.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -375,7 +376,12 @@
       var nomeArquivo = nome + '.jpeg';
       var nomeArquivoCodificado = nomeCodificado + '.jpeg';
       
+      // URL para EXIBIR a imagem (prévia e modal)
       var urlImagem = baseUrl + nomeArquivoCodificado;
+      
+      // URL para BAIXAR (com ?download=)
+      var urlDownload = baseUrl + nomeArquivoCodificado + '?download=';
+      
       var nomeExibicao = nomeAmigavel(nome);
 
       card.innerHTML = `
@@ -386,7 +392,7 @@
         <div class="info">
           <div class="nome">${nomeExibicao}</div>
           <div class="botoes">
-            <a href="${urlImagem}" download="${nomeArquivo}" class="baixar">
+            <a href="${urlDownload}" download="${nomeArquivo}" class="baixar">
               <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
               Baixar
             </a>
