@@ -59,7 +59,6 @@
   .desenho-card .info .baixar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:7px 12px;background:var(--amethyst);color:#fff;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;text-decoration:none;}
   .desenho-card .info .baixar:hover{background:var(--amethyst-deep);transform:translateY(-1px);}
   .desenho-card .info .baixar svg{width:14px;height:14px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
-  /* Botão de abrir no GitHub (visualização) */
   .desenho-card .info .visualizar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:4px;padding:5px 12px;background:var(--bg-alt);color:var(--ink-mute);border-radius:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:10px;border:1px solid var(--line);cursor:pointer;transition:background .15s ease;text-decoration:none;}
   .desenho-card .info .visualizar:hover{background:var(--bg-alt2);}
 
@@ -101,96 +100,98 @@
 <script>
   (function() {
     // ============================================================
-    // LINK DE VISUALIZAÇÃO COM ?raw=true (mostra a imagem)
+    // COMMIT ESPECÍFICO
     // ============================================================
-    var baseUrl = "https://github.com/DescobertaLTDA/mundocolorido/blob/7f99554f5c32e5a133aac8e4768ea49b0e8eada2/desenhos/desenhos_para_colorir/";
+    var commit = "7f99554f5c32e5a133aac8e4768ea49b0e8eada2";
+    var baseUrl = "https://github.com/DescobertaLTDA/mundocolorido/blob/" + commit + "/desenhos/desenhos_para_colorir/";
+    var rawBaseUrl = "https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/" + commit + "/desenhos/desenhos_para_colorir/";
 
     // ============================================================
-    // LISTA COMPLETA DOS 60 DESENHOS (com %20 para espaços)
+    // LISTA COMPLETA DOS DESENHOS (COM ESPAÇOS, IGUAL AO GITHUB)
     // ============================================================
     var desenhos = [
       // GÊNESIS — CRIAÇÃO
-      "01%20Adam_and_Eve_in_Eden",
-      "02%20God_creating_sky_and_stars",
-      "03%20God_creating_ocean_and_fish",
-      "04%20Animals_walking_into_Noahs_Ark",
-      "05%20Noah_building_wooden_ark",
-      "06%20Rainbow_over_ark_with_animals",
+      "01 Adam_and_Eve_in_Eden",
+      "02 God_creating_sky_and_stars",
+      "03 God_creating_ocean_and_fish",
+      "04 Animals_walking_into_Noahs_Ark",
+      "05 Noah_building_wooden_ark",
+      "06 Rainbow_over_ark_with_animals",
       
       // GÊNESIS — MOISÉS
-      "07%20Baby_Moses_floating_in_basket",
-      "08%20Moses_as_shepherd_boy_guarding",
-      "09%20Moses_kneeling_before_burning_bush",
-      "10%20Moses_parting_Red_Sea",
-      "11%20Moses_holding_Ten_Commandments_t",
+      "07 Baby_Moses_floating_in_basket",
+      "08 Moses_as_shepherd_boy_guarding",
+      "09 Moses_kneeling_before_burning_bush",
+      "10 Moses_parting_Red_Sea",
+      "11 Moses_holding_Ten_Commandments_t",
       
       // 1 SAMUEL — DAVI
-      "12%20Shepherd_boy_playing_harp",
-      "13%20Chibi_David_facing_Goliath",
+      "12 Shepherd_boy_playing_harp",
+      "13 Chibi_David_facing_Goliath",
       
       // DANIEL
-      "14%20Daniel_sitting_with_lions",
+      "14 Daniel_sitting_with_lions",
       
       // JONAS
-      "15%20Jonah_swallowed_by_cute_whale",
-      "16%20Jonah_praying_inside_whale",
-      "17%20Jonah_preaching_to_Nineveh",
+      "15 Jonah_swallowed_by_cute_whale",
+      "16 Jonah_praying_inside_whale",
+      "17 Jonah_preaching_to_Nineveh",
       
       // GÊNESIS — JOSÉ
-      "18%20Joseph_standing_with_brothers",
-      "19%20Joseph_dreaming_with_wheat_sheaves",
+      "18 Joseph_standing_with_brothers",
+      "19 Joseph_dreaming_with_wheat_sheaves",
       
       // RUTE
-      "20%20Ruth_walking_through_wheat_field",
+      "20 Ruth_walking_through_wheat_field",
       
       // EVANGELHOS — NATAL
-      "21%20Angel_Gabriel_appearing_to_Mary",
-      "22%20Mary_and_Joseph_traveling_to",
-      "23%20Baby_Jesus_in_manger",
-      "24%20Shepherds_looking_at_bright_star",
-      "25%20Angels_singing_above_shepherds",
-      "26%20Three_Wise_Men_riding_camels",
-      "27%20Wise_men_presenting_gifts",
-      "28%20Young_Jesus_talking_with_elders",
+      "21 Angel_Gabriel_appearing_to_Mary",
+      "22 Mary_and_Joseph_traveling_to",
+      "23 Baby_Jesus_in_manger",
+      "24 Shepherds_looking_at_bright_star",
+      "25 Angels_singing_above_shepherds",
+      "26 Three_Wise_Men_riding_camels",
+      "27 Wise_men_presenting_gifts",
+      "28 Young_Jesus_talking_with_elders",
       
       // EVANGELHOS — MINISTÉRIO
-      "30%20Jesus_baptized_by_John",
-      "31%20Jesus_choosing_twelve_disciples",
-      "32%20Jesus_calming_storm_on_boat",
-      "33%20Jesus_walking_on_water",
-      "34%20Jesus_feeding_crowd_with_fish",
-      "35%20Jesus_healing_blind_man",
-      "36%20Jesus_healing_sick_girl",
-      "37%20Jesus_welcoming_smiling_children",
-      "38%20Shepherd_carrying_lost_lamb",
-      "39%20Jesus_telling_Good_Samaritan_story",
-      "40%20Father_welcoming_prodigal_son_home",
-      "41%20Jesus_turning_water_into_wine",
-      "42%20Zacchaeus_climbing_tree_for_Jesus",
-      "43%20Jesus_raising_Lazarus_family_reu",
+      "30 Jesus_baptized_by_John",
+      "31 Jesus_choosing_twelve_disciples",
+      "32 Jesus_calming_storm_on_boat",
+      "33 Jesus_walking_on_water",
+      "34 Jesus_feeding_crowd_with_fish",
+      "35 Jesus_healing_blind_man",
+      "36 Jesus_healing_sick_girl",
+      "37 Jesus_welcoming_smiling_children",
+      "38 Shepherd_carrying_lost_lamb",
+      "39 Jesus_telling_Good_Samaritan_story",
+      "40 Father_welcoming_prodigal_son_home",
+      "41 Jesus_turning_water_into_wine",
+      "42 Zacchaeus_climbing_tree_for_Jesus",
+      "43 Jesus_raising_Lazarus_family_reu",
       
       // EVANGELHOS — PAIXÃO E RESSURREIÇÃO
-      "44%20Jesus_riding_donkey_into_Jerusalem",
-      "45%20Jesus_and_disciples_at_table",
-      "46%20Jesus_praying_in_garden",
-      "47%20Jesus_carrying_cross_line_art",
-      "48%20Empty_tomb_with_rolled_stone",
-      "49%20Angel_sitting_by_empty_tomb",
-      "50%20Jesus_appearing_to_Mary_Magdalene",
-      "51%20Jesus_appearing_to_disciples",
-      "52%20Jesus_ascending_to_heaven",
+      "44 Jesus_riding_donkey_into_Jerusalem",
+      "45 Jesus_and_disciples_at_table",
+      "46 Jesus_praying_in_garden",
+      "47 Jesus_carrying_cross_line_art",
+      "48 Empty_tomb_with_rolled_stone",
+      "49 Angel_sitting_by_empty_tomb",
+      "50 Jesus_appearing_to_Mary_Magdalene",
+      "51 Jesus_appearing_to_disciples",
+      "52 Jesus_ascending_to_heaven",
       
       // ATOS DOS APÓSTOLOS
-      "53%20Disciples_receiving_Holy_Spirit",
-      "54%20Peter_and_John_healing_man",
-      "55%20Traveler_on_boat_spreading_gospel",
-      "56%20Early_Christians_praying_and_sha",
+      "53 Disciples_receiving_Holy_Spirit",
+      "54 Peter_and_John_healing_man",
+      "55 Traveler_on_boat_spreading_gospel",
+      "56 Early_Christians_praying_and_sha",
       
       // VIDA CRISTÃ — ATUALIDADE
-      "57%20Family_praying_together_at_dinner",
-      "58%20Children_praying_in_bedroom",
-      "59%20Noah_s_ark_rainbow_scene_illustr",
-      "60%20Jesus_surrounded_by_children"
+      "57 Family_praying_together_at_dinner",
+      "58 Children_praying_in_bedroom",
+      "59 Noah_s_ark_rainbow_scene_illustr",
+      "60 Jesus_surrounded_by_children"
     ];
 
     var galeria = document.getElementById('galeria');
@@ -203,9 +204,7 @@
 
     function nomeAmigavel(nome) {
       return nome
-        .replace(/%20/g, ' ')
-        .replace(/\d+%20/g, '')
-        .replace(/\d+_/g, '')
+        .replace(/\d+ /g, '')
         .replace(/_/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
@@ -218,11 +217,16 @@
       var card = document.createElement('div');
       card.className = 'desenho-card';
 
+      // Codifica o nome para URL (espaços viram %20)
+      var nomeCodificado = encodeURIComponent(nome);
       var nomeArquivo = nome + '.jpeg';
+      var nomeArquivoCodificado = nomeCodificado + '.jpeg';
+      
       // URL para exibir a imagem (com ?raw=true)
-      var urlImagem = baseUrl + nomeArquivo + '?raw=true';
-      // URL para download (usa o link raw com o commit)
-      var urlDownload = 'https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/7f99554f5c32e5a133aac8e4768ea49b0e8eada2/desenhos/desenhos_para_colorir/' + nomeArquivo;
+      var urlImagem = baseUrl + nomeArquivoCodificado + '?raw=true';
+      // URL para download (raw)
+      var urlDownload = rawBaseUrl + nomeArquivoCodificado;
+      
       var nomeExibicao = nomeAmigavel(nome);
 
       card.innerHTML = `
@@ -244,7 +248,6 @@
 
       galeria.appendChild(card);
 
-      // Contador de imagens carregadas
       var img = card.querySelector('img');
       if (img) {
         img.addEventListener('load', function() {
