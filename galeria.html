@@ -100,11 +100,14 @@
 <script>
   (function() {
     // ============================================================
-    // COMMIT ESPECÍFICO
+    // CONFIGURAÇÕES
     // ============================================================
     var commit = "7f99554f5c32e5a133aac8e4768ea49b0e8eada2";
-    var baseUrl = "https://github.com/DescobertaLTDA/mundocolorido/blob/" + commit + "/desenhos/desenhos_para_colorir/";
     var rawBaseUrl = "https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/" + commit + "/desenhos/desenhos_para_colorir/";
+    
+    // Usa um proxy para evitar o bloqueio CORS
+    var proxyUrl = "https://corsproxy.io/?";
+    var rawComProxy = proxyUrl + encodeURIComponent(rawBaseUrl);
 
     // ============================================================
     // LISTA COMPLETA DOS DESENHOS (COM ESPAÇOS, IGUAL AO GITHUB)
@@ -217,21 +220,21 @@
       var card = document.createElement('div');
       card.className = 'desenho-card';
 
-      // Codifica o nome para URL (espaços viram %20)
       var nomeCodificado = encodeURIComponent(nome);
       var nomeArquivo = nome + '.jpeg';
       var nomeArquivoCodificado = nomeCodificado + '.jpeg';
       
-      // URL para exibir a imagem (com ?raw=true)
-      var urlImagem = baseUrl + nomeArquivoCodificado + '?raw=true';
-      // URL para download (raw)
+      // URL com proxy para exibir a imagem
+      var urlImagemComProxy = rawComProxy + nomeArquivoCodificado;
+      
+      // URL direta para download (sem proxy, pois o download não é bloqueado)
       var urlDownload = rawBaseUrl + nomeArquivoCodificado;
       
       var nomeExibicao = nomeAmigavel(nome);
 
       card.innerHTML = `
         <div class="preview">
-          <img src="${urlImagem}" alt="${nomeExibicao}" loading="lazy" 
+          <img src="${urlImagemComProxy}" alt="${nomeExibicao}" loading="lazy" 
                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>🖼️<br>${nomeExibicao}</div>'">
         </div>
         <div class="info">
@@ -240,7 +243,7 @@
             <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
             Baixar
           </a>
-          <a href="${urlImagem}" target="_blank" rel="noopener" class="visualizar">
+          <a href="${urlImagemComProxy}" target="_blank" rel="noopener" class="visualizar">
             👁️ Ver imagem
           </a>
         </div>
