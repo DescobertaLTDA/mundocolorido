@@ -807,7 +807,7 @@
     </div>
 
     <div style="max-width:420px;margin:0 auto;position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(240,230,210,0.1);aspect-ratio:9/16;background:#000;">
-      <video src="video_amostra.mp4" poster="video_capa.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" controls playsinline preload="metadata">
+      <video id="video-amostra" src="video_amostra.mp4" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" controls playsinline preload="auto">
         Seu navegador não suporta vídeo HTML5.
       </video>
     </div>
@@ -819,6 +819,43 @@
     </div>
   </div>
 </section>
+
+<!-- Captura um frame do próprio vídeo (aos 1s) e usa como capa (poster) automaticamente -->
+<script>
+(function(){
+  var vid = document.getElementById('video-amostra');
+  if (!vid) return;
+  var captured = false;
+
+  function capturarFrame(){
+    if (captured) return;
+    try {
+      var canvas = document.createElement('canvas');
+      canvas.width = vid.videoWidth;
+      canvas.height = vid.videoHeight;
+      if (!canvas.width || !canvas.height) return;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(vid, 0, 0, canvas.width, canvas.height);
+      vid.poster = canvas.toDataURL('image/jpeg', 0.85);
+      captured = true;
+    } catch (e) {
+      // se der erro (ex: navegador bloqueando), o vídeo segue funcionando normalmente sem poster
+    }
+  }
+
+  function irParaFrameDaCapa(){
+    if (captured) return;
+    if (vid.duration && vid.duration > 1) {
+      vid.currentTime = 1; // pega o frame do segundo 1 do vídeo
+    } else {
+      capturarFrame();
+    }
+  }
+
+  vid.addEventListener('loadeddata', irParaFrameDaCapa);
+  vid.addEventListener('seeked', capturarFrame);
+})();
+</script>
 
 <!-- ============ STRIP ============ -->
 <div class="strip">
