@@ -45,7 +45,7 @@
   .page-header h1{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,38px);color:var(--ink-light);}
   .page-header h1 em{font-style:italic;background:linear-gradient(100deg,var(--amethyst),var(--amethyst-deep) 60%,var(--citrino));-webkit-background-clip:text;background-clip:text;color:transparent;}
   .page-header p{color:var(--ink-mute);font-size:15px;margin-top:6px;}
-  .page-header .voltar{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--amethyst);border:1px solid var(--line);padding:6px 16px;border-radius:20px;transition:background .15s ease;}
+  .page-header .voltar{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--amethyst);border:1px solid var(--line);padding:6px 16px;border-radius:20px;transition:background .15s ease;text-decoration:none;}
   .page-header .voltar:hover{background:var(--bg-alt);}
 
   .galeria-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:16px;padding:10px 0 40px;}
@@ -56,11 +56,15 @@
   .desenho-card .preview .placeholder{color:var(--ink-mute);font-size:11px;text-align:center;padding:12px;}
   .desenho-card .info{padding:10px 12px 12px;}
   .desenho-card .info .nome{font-size:11px;font-weight:500;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px;line-height:1.3;}
-  .desenho-card .info .baixar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:7px 12px;background:var(--amethyst);color:#fff;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;}
+  .desenho-card .info .baixar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:7px 12px;background:var(--amethyst);color:#fff;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;text-decoration:none;}
   .desenho-card .info .baixar:hover{background:var(--amethyst-deep);transform:translateY(-1px);}
   .desenho-card .info .baixar svg{width:14px;height:14px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
 
   .contador{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-mute);padding:10px 0 20px;border-top:1px solid var(--line);}
+
+  .loading{text-align:center;padding:60px 0;color:var(--ink-mute);font-size:14px;}
+  .loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--amethyst);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px;}
+  @keyframes spin{to{transform:rotate(360deg);}}
 
   @media (max-width:600px){
     .galeria-grid{grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:12px;}
@@ -81,89 +85,131 @@
     <a href="obrigado.html" class="voltar">← Voltar para o kit</a>
   </div>
 
-  <div class="galeria-grid" id="galeria"></div>
+  <div class="galeria-grid" id="galeria">
+    <div class="loading">
+      <div class="spinner"></div>
+      <p>Carregando desenhos...</p>
+    </div>
+  </div>
 
-  <div class="contador" id="contador">Carregando...</div>
+  <div class="contador" id="contador"></div>
 </section>
 
 <script>
   (function() {
-    // LISTA COMPLETA DOS DESENHOS (baseada nos arquivos que você enviou)
+    // ============================================================
+    // LINK CORRETO COM O COMMIT ESPECÍFICO (raw)
+    // ============================================================
+    var baseUrl = "https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/7f99554f5c32e5a133aac8e4768ea49b0e8eada2/desenhos/desenhos_para_colorir/";
+
+    // ============================================================
+    // LISTA COMPLETA DOS 60 DESENHOS (com %20 para espaços)
+    // ============================================================
     var desenhos = [
-      "01_Adam_and_Eve_in_Eden",
-      "02_God_creating_sky_and_stars",
-      "03_God_creating_ocean_and_fish",
-      "04_Animals_walking_into_Noahs_Ark",
-      "05_Noah_building_wooden_ark",
-      "06_Rainbow_over_ark_with_animals",
-      "07_Baby_Moses_floating_in_basket",
-      "08_Moses_as_shepherd_boy_guarding",
-      "09_Moses_kneeling_before_burning_bush",
-      "10_Moses_parting_Red_Sea",
-      "11_Moses_holding_Ten_Commandments",
-      "12_Shepherd_boy_playing_harp",
-      "13_Chibi_David_facing_Goliath",
-      "14_Daniel_sitting_with_lions",
-      "15_Jonah_swallowed_by_cute_whale",
-      "16_Jonah_praying_inside_whale",
-      "17_Jonah_preaching_to_Nineveh",
-      "18_Joseph_standing_with_brothers",
-      "19_Joseph_dreaming_with_wheat_sheaves",
-      "20_Ruth_walking_through_wheat_field",
-      "21_Angel_Gabriel_appearing_to_Mary",
-      "22_Mary_and_Joseph_traveling_to",
-      "23_Baby_Jesus_in_manger",
-      "24_Shepherds_looking_at_bright_star",
-      "25_Angels_singing_above_shepherds",
-      "26_Three_Wise_Men_riding_camels",
-      "27_Wise_men_presenting_gifts",
-      "28_Young_Jesus_talking_with_elders",
-      "30_Jesus_baptized_by_John",
-      "31_Jesus_choosing_twelve_disciples",
-      "32_Jesus_calming_storm_on_boat",
-      "33_Jesus_walking_on_water",
-      "34_Jesus_feeding_crowd_with_fish",
-      "35_Jesus_healing_blind_man",
-      "36_Jesus_healing_sick_girl",
-      "37_Jesus_welcoming_smiling_children",
-      "38_Shepherd_carrying_lost_lamb",
-      "39_Jesus_telling_Good_Samaritan_story",
-      "40_Father_welcoming_prodigal_son_home",
-      "41_Jesus_turning_water_into_wine",
-      "42_Zacchaeus_climbing_tree_for_Jesus",
-      "43_Jesus_raising_Lazarus_family_reu",
-      "44_Jesus_riding_donkey_into_Jerusalem",
-      "45_Jesus_and_disciples_at_table",
-      "46_Jesus_praying_in_garden",
-      "47_Jesus_carrying_cross_line_art",
-      "48_Empty_tomb_with_rolled_stone",
-      "49_Angel_sitting_by_empty_tomb",
-      "50_Jesus_appearing_to_Mary_Magdalene",
-      "51_Jesus_appearing_to_disciples",
-      "52_Jesus_ascending_to_heaven",
-      "53_Disciples_receiving_Holy_Spirit",
-      "54_Peter_and_John_healing_man",
-      "55_Traveler_on_boat_spreading_gospel",
-      "56_Early_Christians_praying_and_sha",
-      "57_Family_praying_together_at_dinner",
-      "58_Children_praying_in_bedroom",
-      "59_Noah_s_ark_rainbow_scene_illustr",
-      "60_Jesus_surrounded_by_children"
+      // GÊNESIS — CRIAÇÃO
+      "01%20Adam_and_Eve_in_Eden",
+      "02%20God_creating_sky_and_stars",
+      "03%20God_creating_ocean_and_fish",
+      "04%20Animals_walking_into_Noahs_Ark",
+      "05%20Noah_building_wooden_ark",
+      "06%20Rainbow_over_ark_with_animals",
+      
+      // GÊNESIS — MOISÉS
+      "07%20Baby_Moses_floating_in_basket",
+      "08%20Moses_as_shepherd_boy_guarding",
+      "09%20Moses_kneeling_before_burning_bush",
+      "10%20Moses_parting_Red_Sea",
+      "11%20Moses_holding_Ten_Commandments_t",
+      
+      // 1 SAMUEL — DAVI
+      "12%20Shepherd_boy_playing_harp",
+      "13%20Chibi_David_facing_Goliath",
+      
+      // DANIEL
+      "14%20Daniel_sitting_with_lions",
+      
+      // JONAS
+      "15%20Jonah_swallowed_by_cute_whale",
+      "16%20Jonah_praying_inside_whale",
+      "17%20Jonah_preaching_to_Nineveh",
+      
+      // GÊNESIS — JOSÉ
+      "18%20Joseph_standing_with_brothers",
+      "19%20Joseph_dreaming_with_wheat_sheaves",
+      
+      // RUTE
+      "20%20Ruth_walking_through_wheat_field",
+      
+      // EVANGELHOS — NATAL
+      "21%20Angel_Gabriel_appearing_to_Mary",
+      "22%20Mary_and_Joseph_traveling_to",
+      "23%20Baby_Jesus_in_manger",
+      "24%20Shepherds_looking_at_bright_star",
+      "25%20Angels_singing_above_shepherds",
+      "26%20Three_Wise_Men_riding_camels",
+      "27%20Wise_men_presenting_gifts",
+      "28%20Young_Jesus_talking_with_elders",
+      
+      // EVANGELHOS — MINISTÉRIO
+      "30%20Jesus_baptized_by_John",
+      "31%20Jesus_choosing_twelve_disciples",
+      "32%20Jesus_calming_storm_on_boat",
+      "33%20Jesus_walking_on_water",
+      "34%20Jesus_feeding_crowd_with_fish",
+      "35%20Jesus_healing_blind_man",
+      "36%20Jesus_healing_sick_girl",
+      "37%20Jesus_welcoming_smiling_children",
+      "38%20Shepherd_carrying_lost_lamb",
+      "39%20Jesus_telling_Good_Samaritan_story",
+      "40%20Father_welcoming_prodigal_son_home",
+      "41%20Jesus_turning_water_into_wine",
+      "42%20Zacchaeus_climbing_tree_for_Jesus",
+      "43%20Jesus_raising_Lazarus_family_reu",
+      
+      // EVANGELHOS — PAIXÃO E RESSURREIÇÃO
+      "44%20Jesus_riding_donkey_into_Jerusalem",
+      "45%20Jesus_and_disciples_at_table",
+      "46%20Jesus_praying_in_garden",
+      "47%20Jesus_carrying_cross_line_art",
+      "48%20Empty_tomb_with_rolled_stone",
+      "49%20Angel_sitting_by_empty_tomb",
+      "50%20Jesus_appearing_to_Mary_Magdalene",
+      "51%20Jesus_appearing_to_disciples",
+      "52%20Jesus_ascending_to_heaven",
+      
+      // ATOS DOS APÓSTOLOS
+      "53%20Disciples_receiving_Holy_Spirit",
+      "54%20Peter_and_John_healing_man",
+      "55%20Traveler_on_boat_spreading_gospel",
+      "56%20Early_Christians_praying_and_sha",
+      
+      // VIDA CRISTÃ — ATUALIDADE
+      "57%20Family_praying_together_at_dinner",
+      "58%20Children_praying_in_bedroom",
+      "59%20Noah_s_ark_rainbow_scene_illustr",
+      "60%20Jesus_surrounded_by_children"
     ];
 
-    var baseUrl = "https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/desenhos_para_colorir/";
     var galeria = document.getElementById('galeria');
     var contador = document.getElementById('contador');
 
     if (!galeria) return;
 
+    // Remove o loading
+    galeria.innerHTML = '';
+
     function nomeAmigavel(nome) {
       return nome
-        .replace(/_/g, ' ')
+        .replace(/%20/g, ' ')
+        .replace(/\d+%20/g, '')
         .replace(/\d+_/g, '')
+        .replace(/_/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
     }
+
+    var total = desenhos.length;
+    var carregados = 0;
 
     desenhos.forEach(function(nome) {
       var card = document.createElement('div');
@@ -175,7 +221,8 @@
 
       card.innerHTML = `
         <div class="preview">
-          <img src="${urlImagem}" alt="${nomeExibicao}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>🖼️<br>${nomeExibicao}</div>'">
+          <img src="${urlImagem}" alt="${nomeExibicao}" loading="lazy" 
+               onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>🖼️<br>${nomeExibicao}</div>'">
         </div>
         <div class="info">
           <div class="nome">${nomeExibicao}</div>
@@ -187,10 +234,27 @@
       `;
 
       galeria.appendChild(card);
+
+      // Contador de imagens carregadas
+      var img = card.querySelector('img');
+      if (img) {
+        img.addEventListener('load', function() {
+          carregados++;
+          if (contador) {
+            contador.textContent = '📚 ' + carregados + ' de ' + total + ' desenhos carregados';
+          }
+        });
+        img.addEventListener('error', function() {
+          carregados++;
+          if (contador) {
+            contador.textContent = '📚 ' + carregados + ' de ' + total + ' desenhos carregados';
+          }
+        });
+      }
     });
 
     if (contador) {
-      contador.textContent = '📚 ' + desenhos.length + ' desenhos disponíveis para baixar';
+      contador.textContent = '📚 0 de ' + total + ' desenhos carregados';
     }
   })();
 </script>
