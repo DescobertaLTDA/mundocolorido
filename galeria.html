@@ -51,16 +51,19 @@
   .galeria-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:16px;padding:10px 0 40px;}
   .desenho-card{background:var(--parchment);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .2s ease, box-shadow .2s ease;}
   .desenho-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(45,27,78,0.12);}
-  .desenho-card .preview{width:100%;aspect-ratio:1/1;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .desenho-card .preview{width:100%;aspect-ratio:1/1;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;overflow:hidden;cursor:pointer;}
   .desenho-card .preview img{width:100%;height:100%;object-fit:cover;}
   .desenho-card .preview .placeholder{color:var(--ink-mute);font-size:11px;text-align:center;padding:12px;}
   .desenho-card .info{padding:10px 12px 12px;}
   .desenho-card .info .nome{font-size:11px;font-weight:500;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px;line-height:1.3;}
-  .desenho-card .info .baixar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:7px 12px;background:var(--amethyst);color:#fff;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;text-decoration:none;}
-  .desenho-card .info .baixar:hover{background:var(--amethyst-deep);transform:translateY(-1px);}
-  .desenho-card .info .baixar svg{width:14px;height:14px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
-  .desenho-card .info .visualizar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:4px;padding:5px 12px;background:var(--bg-alt);color:var(--ink-mute);border-radius:8px;font-family:'Inter',sans-serif;font-weight:500;font-size:10px;border:1px solid var(--line);cursor:pointer;transition:background .15s ease;text-decoration:none;}
-  .desenho-card .info .visualizar:hover{background:var(--bg-alt2);}
+  .desenho-card .info .botoes{display:flex;gap:6px;margin-top:8px;}
+  .desenho-card .info .botoes .baixar,
+  .desenho-card .info .botoes .visualizar{display:flex;align-items:center;justify-content:center;gap:5px;flex:1;padding:7px 10px;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:10px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;text-decoration:none;}
+  .desenho-card .info .botoes .baixar{background:var(--amethyst);color:#fff;}
+  .desenho-card .info .botoes .baixar:hover{background:var(--amethyst-deep);transform:translateY(-1px);}
+  .desenho-card .info .botoes .baixar svg{width:14px;height:14px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
+  .desenho-card .info .botoes .visualizar{background:var(--bg-alt);color:var(--ink-mute);border:1px solid var(--line);}
+  .desenho-card .info .botoes .visualizar:hover{background:var(--bg-alt2);}
 
   .contador{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-mute);padding:10px 0 20px;border-top:1px solid var(--line);}
 
@@ -68,9 +71,121 @@
   .loading .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--line);border-top-color:var(--amethyst);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px;}
   @keyframes spin{to{transform:rotate(360deg);}}
 
+  /* ============================================================
+     MODAL / POPUP
+     ============================================================ */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    animation: fadeIn .3s ease;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .modal-overlay .modal-content {
+    background: var(--parchment);
+    border-radius: 16px;
+    max-width: 700px;
+    width: 100%;
+    max-height: 90vh;
+    overflow: auto;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    animation: zoomIn .3s ease;
+  }
+  .modal-overlay .modal-content .fechar {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: var(--bg-alt);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--ink-mute);
+    transition: background .15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  .modal-overlay .modal-content .fechar:hover {
+    background: var(--bg-alt2);
+  }
+  .modal-overlay .modal-content .modal-imagem {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+  }
+  .modal-overlay .modal-content .modal-titulo {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--ink);
+    margin-top: 12px;
+    text-align: center;
+  }
+  .modal-overlay .modal-content .modal-baixar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 10px 24px;
+    background: var(--amethyst);
+    color: #fff;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background .15s ease, transform .15s ease;
+    border: none;
+    cursor: pointer;
+  }
+  .modal-overlay .modal-content .modal-baixar:hover {
+    background: var(--amethyst-deep);
+    transform: translateY(-2px);
+  }
+  .modal-overlay .modal-content .modal-baixar svg {
+    width: 16px;
+    height: 16px;
+    stroke: #fff;
+    stroke-width: 2.4;
+    fill: none;
+  }
+  .modal-overlay .modal-content .modal-footer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+
   @media (max-width:600px){
     .galeria-grid{grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:12px;}
     .desenho-card .info .nome{font-size:10px;}
+    .desenho-card .info .botoes .baixar,
+    .desenho-card .info .botoes .visualizar{font-size:9px;padding:6px 8px;}
+    .modal-overlay .modal-content{padding:14px;margin:10px;}
   }
 </style>
 </head>
@@ -96,6 +211,23 @@
 
   <div class="contador" id="contador"></div>
 </section>
+
+<!-- ============================================================
+     MODAL / POPUP
+     ============================================================ -->
+<div class="modal-overlay" id="modalVisualizar">
+  <div class="modal-content">
+    <button class="fechar" id="modalFechar" aria-label="Fechar">✕</button>
+    <img src="" alt="" class="modal-imagem" id="modalImagem">
+    <h3 class="modal-titulo" id="modalTitulo">Desenho</h3>
+    <div class="modal-footer">
+      <a href="#" download="#" class="modal-baixar" id="modalBaixar">
+        <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        Baixar
+      </a>
+    </div>
+  </div>
+</div>
 
 <script>
   (function() {
@@ -172,6 +304,13 @@
     var galeria = document.getElementById('galeria');
     var contador = document.getElementById('contador');
 
+    // Elementos do modal
+    var modal = document.getElementById('modalVisualizar');
+    var modalImg = document.getElementById('modalImagem');
+    var modalTitulo = document.getElementById('modalTitulo');
+    var modalBaixar = document.getElementById('modalBaixar');
+    var modalFechar = document.getElementById('modalFechar');
+
     if (!galeria) return;
 
     // Remove o loading
@@ -186,6 +325,45 @@
         .trim();
     }
 
+    // ============================================================
+    // FUNÇÃO PARA ABRIR O MODAL
+    // ============================================================
+    function abrirModal(url, nome, nomeArquivo) {
+      modalImg.src = url;
+      modalImg.alt = nome;
+      modalTitulo.textContent = nome;
+      modalBaixar.href = url;
+      modalBaixar.download = nomeArquivo;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function fecharModal() {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Fechar com o botão X
+    if (modalFechar) {
+      modalFechar.addEventListener('click', fecharModal);
+    }
+
+    // Fechar clicando no overlay (fundo escuro)
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          fecharModal();
+        }
+      });
+    }
+
+    // Fechar com tecla ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        fecharModal();
+      }
+    });
+
     var total = desenhos.length;
     var carregados = 0;
 
@@ -197,32 +375,52 @@
       var nomeArquivo = nome + '.jpeg';
       var nomeArquivoCodificado = nomeCodificado + '.jpeg';
       
-      // URL do Supabase para exibir a imagem
       var urlImagem = baseUrl + nomeArquivoCodificado;
-      
-      // URL para download (mesma URL)
-      var urlDownload = baseUrl + nomeArquivoCodificado;
-      
       var nomeExibicao = nomeAmigavel(nome);
 
       card.innerHTML = `
-        <div class="preview">
+        <div class="preview" data-url="${urlImagem}" data-nome="${nomeExibicao}" data-arquivo="${nomeArquivo}">
           <img src="${urlImagem}" alt="${nomeExibicao}" loading="lazy" 
                onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>🖼️<br>${nomeExibicao}</div>'">
         </div>
         <div class="info">
           <div class="nome">${nomeExibicao}</div>
-          <a href="${urlDownload}" download="${nomeArquivo}" class="baixar">
-            <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
-            Baixar
-          </a>
-          <a href="${urlImagem}" target="_blank" rel="noopener" class="visualizar">
-            👁️ Ver imagem
-          </a>
+          <div class="botoes">
+            <a href="${urlImagem}" download="${nomeArquivo}" class="baixar">
+              <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+              Baixar
+            </a>
+            <button class="visualizar" data-url="${urlImagem}" data-nome="${nomeExibicao}" data-arquivo="${nomeArquivo}">
+              👁️ Ver
+            </button>
+          </div>
         </div>
       `;
 
       galeria.appendChild(card);
+
+      // Evento de clique na prévia (abre o modal)
+      var preview = card.querySelector('.preview');
+      if (preview) {
+        preview.addEventListener('click', function() {
+          var url = this.dataset.url;
+          var nome = this.dataset.nome;
+          var arquivo = this.dataset.arquivo;
+          abrirModal(url, nome, arquivo);
+        });
+      }
+
+      // Evento de clique no botão "Ver"
+      var btnVer = card.querySelector('.visualizar');
+      if (btnVer) {
+        btnVer.addEventListener('click', function(e) {
+          e.stopPropagation();
+          var url = this.dataset.url;
+          var nome = this.dataset.nome;
+          var arquivo = this.dataset.arquivo;
+          abrirModal(url, nome, arquivo);
+        });
+      }
 
       var img = card.querySelector('img');
       if (img) {
