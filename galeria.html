@@ -110,91 +110,68 @@
     var rawComProxy = proxyUrl + encodeURIComponent(rawBaseUrl);
 
     // ============================================================
-    // LISTA COMPLETA DOS DESENHOS (NOMES EXATOS DO GITHUB)
+    // LISTA COMPLETA DOS DESENHOS (NOMES EXATOS DO SEU PC)
     // ============================================================
     var desenhos = [
-      // GÊNESIS — CRIAÇÃO
+      "10_Moses_parting_Red_Sea_202608131413",
+      "11_Moses_holding_Ten_Commandments_t_202608131417",
+      "12_Shepherd_boy_playing_harp_202608131422",
+      "13_Chibi_David_facing_Goliath_202608131440",
+      "14_Daniel_sitting_with_lions_202608131444",
+      "15_Jonah_swallowed_by_cute_whale_202608131446",
+      "16_Jonah_praying_inside_whale_202608131449",
+      "17_Jonah_preaching_to_Nineveh_202608131454",
+      "18_Joseph_standing_with_brothers_202608131455",
+      "19_Joseph_dreaming_with_wheat_sheaves_202608131457",
+      "20_Ruth_walking_through_wheat_field_202608131459",
+      "21_Angel_Gabriel_appearing_to_Mary_202608131501",
+      "22_Mary_and_Joseph_traveling_to_202608131503",
+      "23_Baby_Jesus_in_manger_202608131504",
+      "24_Shepherds_looking_at_bright_star_202608131505",
+      "25_Angels_singing_above_shepherds_202608131509",
+      "26_Three_Wise_Men_riding_camels_202608131511",
+      "27_Wise_men_presenting_gifts_202608131515",
+      "28_Young_Jesus_talking_with_elders_202608131516",
+      "30_Jesus_baptized_by_John_202608131518",
+      "31_Jesus_choosing_twelve_disciples_202608131519",
+      "32_Jesus_calming_storm_on_boat_202608131520",
+      "33_Jesus_walking_on_water_202608131521",
+      "34_Jesus_feeding_crowd_with_fish_202608131523",
+      "35_Jesus_healing_blind_man_202608131524",
+      "36_Jesus_healing_sick_girl_202608131526",
+      "37_Jesus_welcoming_smiling_children_202608131536",
+      "38_Shepherd_carrying_lost_lamb_202608131538",
+      "39_Jesus_telling_Good_Samaritan_story_202608131539",
+      "40_Father_welcoming_prodigal_son_home_202608131540",
+      "41_Jesus_turning_water_into_wine_202608131545",
+      "42_Zacchaeus_climbing_tree_for_Jesus_202608131546",
+      "43_Jesus_raising_Lazarus_family_reu_202608131548",
+      "44_Jesus_riding_donkey_into_Jerusalem_202608131550",
+      "45_Jesus_and_disciples_at_table_202608131551",
+      "46_Jesus_praying_in_garden_202608131552",
+      "47_Jesus_carrying_cross_line_art_202608131553",
+      "48_Empty_tomb_with_rolled_stone_202608131555",
+      "49_Angel_sitting_by_empty_tomb_202608131556",
+      "50_Jesus_appearing_to_Mary_Magdalene_202608131557",
+      "51_Jesus_appearing_to_disciples_202608131558",
+      "52_Jesus_ascending_to_heaven_202608131559",
+      "53_Disciples_receiving_Holy_Spirit_202608131601",
+      "54_Peter_and_John_healing_man_202608131602",
+      "55_Traveler_on_boat_spreading_gospel_202608131605",
+      "56_Early_Christians_praying_and_sha_202608131607",
+      "57_Family_praying_together_at_dinner_202608131608",
+      "58_Children_praying_in_bedroom_202608131609",
+      "59_Noah_s_ark_rainbow_scene_illustr_202608131614",
+      "60_Jesus_surrounded_by_children_202608131616",
+      "8_Moses_as_shepherd_boy_guarding_202608131410",
+      "9_Moses_kneeling_before_burning_bush_202608131411",
       "Adam_and_Eve_in_Eden_202608131354",
-      "God_creating_sky_and_stars_202608131348",
-      "God_creating_ocean_and_fish_202608131350",
       "Animals_walking_into_Noahs_Ark_202608131359",
-      "Noah_building_wooden_ark_202608131357",
-      "Rainbow_over_ark_with_animals_202608131402",
-      
-      // GÊNESIS — MOISÉS
       "Baby_Moses_floating_in_basket_202608131405",
-      "8 Moses_as_shepherd_boy_guarding_202608131410",
-      "9 Moses_kneeling_before_burning_bush_202608131411",
-      "10 Moses_parting_Red_Sea_202608131413",
-      "11 Moses_holding_Ten_Commandments_t…_202608131417",
-      
-      // 1 SAMUEL — DAVI
-      "12 Shepherd_boy_playing_harp_202608131422",
-      "13 Chibi_David_facing_Goliath_202608131440",
-      
-      // DANIEL
-      "14 Daniel_sitting_with_lions_202608131444",
-      
-      // JONAS
-      "15 Jonah_swallowed_by_cute_whale_202608131446",
-      "16 Jonah_praying_inside_whale_202608131449",
-      "17 Jonah_preaching_to_Nineveh_202608131454",
-      
-      // GÊNESIS — JOSÉ
-      "18 Joseph_standing_with_brothers_202608131455",
-      "19 Joseph_dreaming_with_wheat_sheaves_202608131457",
-      
-      // RUTE
-      "20 Ruth_walking_through_wheat_field_202608131459",
-      
-      // EVANGELHOS — NATAL
-      "21 Angel_Gabriel_appearing_to_Mary_202608131501",
-      "22 Mary_and_Joseph_traveling_to_202608131503",
-      "23 Baby_Jesus_in_manger_202608131504",
-      "24 Shepherds_looking_at_bright_star_202608131505",
-      "25 Angels_singing_above_shepherds_202608131509",
-      "26 Three_Wise_Men_riding_camels_202608131511",
-      "27 Wise_men_presenting_gifts_202608131515",
-      "28 Young_Jesus_talking_with_elders_202608131516",
-      
-      // EVANGELHOS — MINISTÉRIO
-      "30 Jesus_baptized_by_John_202608131518",
-      "31 Jesus_choosing_twelve_disciples_…_202608131519",
-      "32 Jesus_calming_storm_on_boat_202608131520",
-      "33 Jesus_walking_on_water_202608131521",
-      "34 Jesus_feeding_crowd_with_fish_202608131523",
-      "35 Jesus_healing_blind_man_202608131524",
-      "36 Jesus_healing_sick_girl_202608131526",
-      "37 Jesus_welcoming_smiling_children_202608131536",
-      "38 Shepherd_carrying_lost_lamb_202608131538",
-      "39 Jesus_telling_Good_Samaritan_story_202608131539",
-      "40 Father_welcoming_prodigal_son_home_202608131540",
-      "41 Jesus_turning_water_into_wine_202608131545",
-      "42 Zacchaeus_climbing_tree_for_Jesus_202608131546",
-      "43 Jesus_raising_Lazarus_family_reu…_202608131548",
-      
-      // EVANGELHOS — PAIXÃO E RESSURREIÇÃO
-      "44 Jesus_riding_donkey_into_Jerusalem_202608131550",
-      "45 Jesus_and_disciples_at_table_202608131551",
-      "46 Jesus_praying_in_garden_202608131552",
-      "47 Jesus_carrying_cross_line_art_202608131553",
-      "48 Empty_tomb_with_rolled_stone_202608131555",
-      "49 Angel_sitting_by_empty_tomb_202608131556",
-      "50 Jesus_appearing_to_Mary_Magdalene_202608131557",
-      "51 Jesus_appearing_to_disciples_202608131558",
-      "52 Jesus_ascending_to_heaven_202608131559",
-      
-      // ATOS DOS APÓSTOLOS
-      "53 Disciples_receiving_Holy_Spirit_202608131601",
-      "54 Peter_and_John_healing_man_202608131602",
-      "55 Traveler_on_boat_spreading_gospel_202608131605",
-      "56 Early_Christians_praying_and_sha…_202608131607",
-      
-      // VIDA CRISTÃ — ATUALIDADE
-      "57 Family_praying_together_at_dinner_202608131608",
-      "58 Children_praying_in_bedroom_202608131609",
-      "59 Noah_s_ark_rainbow_scene_illustr…_202608131614",
-      "60 Jesus_surrounded_by_children_202608131616"
+      "God_creating_ocean_and_fish_202608131350",
+      "God_creating_sky_and_stars_202608131348",
+      "Noah_building_wooden_ark_202608131357",
+      "Rainbow_over_ark_with_animals_202608131402"
     ];
 
     var galeria = document.getElementById('galeria');
@@ -208,7 +185,7 @@
     function nomeAmigavel(nome) {
       return nome
         .replace(/_20260813\d+/g, '')
-        .replace(/\d+ /g, '')
+        .replace(/^\d+_/g, '')
         .replace(/_/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
