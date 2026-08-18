@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#7c3aed">
 <title>Compra Confirmada — Mundo Colorido</title>
 <link rel="icon" type="image/png" href="logo.png?v=2">
 <link rel="shortcut icon" type="image/png" href="logo.png?v=2">
@@ -12,24 +12,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:#ffffff;
-    --bg-alt:#f9f5ff;
-    --bg-alt2:#f3edfc;
-    --parchment:#fcf9ff;
-    --parchment-dim:#f3eafa;
-    --ink:#1f1a2e;
-    --ink-soft:#4a3f66;
-    --ink-light:#2a2342;
-    --ink-mute:#6a5f8a;
+    --bg:#f5f0ff;
+    --bg-alt:#ede6ff;
+    --bg-alt2:#e8ddff;
+    --parchment:#fcfaff;
+    --parchment-dim:#f5edff;
+    --ink:#2d1b4e;
+    --ink-soft:#4a2d7a;
+    --ink-light:#1f0f3a;
+    --ink-mute:#6b4f9a;
     --amethyst:#7c3aed;
     --amethyst-deep:#5b21b6;
+    --amethyst-light:#a78bfa;
     --citrino:#fbbf24;
     --quartzo:#60a5fa;
     --turmalina:#34d399;
     --topazio:#fb923c;
-    --line:rgba(44,36,71,0.12);
-    --line-strong:rgba(44,36,71,0.22);
-    --shadow:0 20px 50px rgba(44,36,71,0.14);
+    --line:rgba(124,58,237,0.14);
+    --line-strong:rgba(124,58,237,0.24);
+    --shadow:0 20px 50px rgba(45,27,78,0.16);
     --gold:#f59e0b;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
@@ -39,21 +40,22 @@
   a{color:inherit;text-decoration:none;}
   .wrap{max-width:900px;margin:0 auto;padding:0 28px;}
   h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;letter-spacing:-0.01em;}
-  .eyebrow{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--citrino);display:flex;align-items:center;gap:10px;justify-content:center;}
-  .eyebrow::before,.eyebrow::after{content:'';width:22px;height:1px;background:var(--citrino);display:inline-block;opacity:0.6;}
+  .eyebrow{font-family:'Space Mono',monospace;font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--amethyst);display:flex;align-items:center;gap:10px;justify-content:center;}
+  .eyebrow::before,.eyebrow::after{content:'';width:22px;height:1px;background:var(--amethyst);display:inline-block;opacity:0.6;}
 
-  header{padding:22px 0;border-bottom:1px solid var(--line);}
-  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:0.01em;display:flex;align-items:center;justify-content:center;gap:9px;}
+  /* HEADER */
+  header{padding:22px 0;border-bottom:1px solid var(--line);background:rgba(245,240,255,0.9);backdrop-filter:blur(10px);}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:19px;letter-spacing:0.01em;display:flex;align-items:center;justify-content:center;gap:9px;color:var(--ink);}
   .logo img{height:30px;width:auto;flex-shrink:0;object-fit:contain;}
   .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--amethyst);box-shadow:0 0 10px var(--amethyst);}
 
   /* HERO CONFIRMAÇÃO */
-  .hero-confirm{padding:64px 0 40px;text-align:center;background:radial-gradient(ellipse 800px 400px at 50% -10%, rgba(52,211,153,0.14), transparent 60%);}
+  .hero-confirm{padding:64px 0 40px;text-align:center;background:radial-gradient(ellipse 800px 400px at 50% -10%, rgba(124,58,237,0.12), transparent 60%);}
   .check-badge{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--turmalina),#22a65e);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;box-shadow:0 14px 34px rgba(34,166,94,0.35);animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both;}
   .check-badge svg{width:36px;height:36px;stroke:#fff;stroke-width:3;fill:none;}
   @keyframes popIn{0%{transform:scale(0.4);opacity:0;}100%{transform:scale(1);opacity:1;}}
   .hero-confirm h1{font-size:clamp(28px,4.4vw,42px);line-height:1.12;color:var(--ink-light);margin-top:18px;}
-  .hero-confirm h1 em{font-style:italic;font-weight:500;background:linear-gradient(100deg,var(--citrino),var(--quartzo) 60%,var(--amethyst));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero-confirm h1 em{font-style:italic;font-weight:500;background:linear-gradient(100deg,var(--amethyst),var(--amethyst-deep) 60%,var(--citrino));-webkit-background-clip:text;background-clip:text;color:transparent;}
   .hero-confirm p{margin-top:14px;font-size:16.5px;color:var(--ink-mute);max-width:480px;margin-left:auto;margin-right:auto;}
   .order-chip{display:inline-flex;align-items:center;gap:8px;margin-top:20px;font-family:'Space Mono',monospace;font-size:12.5px;color:var(--ink-soft);background:var(--parchment);border:1px solid var(--line);padding:8px 16px;border-radius:20px;}
   .order-chip b{color:var(--amethyst-deep);}
@@ -71,8 +73,9 @@
   /* MATERIAIS / DOWNLOAD */
   .materials{padding:36px 0 8px;}
   .mat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
-  .mat-card{background:var(--parchment);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;align-items:center;gap:14px;transition:transform .15s ease, box-shadow .15s ease;}
+  .mat-card{background:var(--parchment);border:1px solid var(--line);border-radius:12px;padding:18px 20px;display:flex;flex-direction:column;transition:transform .15s ease, box-shadow .15s ease;overflow:hidden;}
   .mat-card:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(44,36,71,0.1);}
+  .mat-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
   .mat-icon{flex-shrink:0;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;}
   .mat-icon svg{width:22px;height:22px;stroke-width:1.8;fill:none;}
   .mat-info{flex:1;}
@@ -80,15 +83,24 @@
   .mat-info .tag.principal{color:#3a2005;background:rgba(251,191,36,0.25);}
   .mat-info h4{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--ink);}
   .mat-info p{font-size:11.5px;color:var(--ink-mute);margin-top:2px;}
-  .mat-download{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;transition:transform .15s ease, background .15s ease;}
-  .mat-download:hover{background:var(--amethyst);transform:translateY(-1px);}
-  .mat-download svg{width:15px;height:15px;stroke:#fff;stroke-width:2.4;fill:none;}
+
+  .mat-preview{width:100%;aspect-ratio:16/10;border-radius:8px;overflow:hidden;background:var(--bg-alt);margin:6px 0 10px;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);}
+  .mat-preview img{width:100%;height:100%;object-fit:cover;}
+  .mat-preview .placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--ink-mute);font-size:12px;gap:6px;padding:12px;text-align:center;}
+  .mat-preview .placeholder svg{width:28px;height:28px;stroke:var(--amethyst);}
+
+  .mat-download-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px 16px;background:var(--amethyst);color:#fff;border-radius:10px;font-family:'Inter',sans-serif;font-weight:600;font-size:13px;border:none;cursor:pointer;transition:transform .15s ease, box-shadow .15s ease;text-decoration:none;margin-top:4px;}
+  .mat-download-btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(124,58,237,0.3);background:var(--amethyst-deep);}
+  .mat-download-btn svg{width:16px;height:16px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
+  .mat-download-btn.secundario{background:var(--ink-light);}
+  .mat-download-btn.secundario:hover{background:var(--ink);}
 
   /* SUPORTE */
   .support-cta{margin:48px 0;padding:30px 28px;background:var(--ink-light);border-radius:16px;text-align:center;color:#fff;}
   .support-cta h3{font-family:'Fraunces',serif;font-size:20px;color:#fff;}
   .support-cta p{margin-top:8px;font-size:14px;color:rgba(255,255,255,0.7);max-width:420px;margin-left:auto;margin-right:auto;}
-  .support-btn{margin-top:18px;display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-weight:700;font-size:13.5px;background:#25D366;color:#fff;padding:13px 26px;border-radius:30px;box-shadow:0 10px 26px rgba(37,211,102,0.3);}
+  .support-btn{margin-top:18px;display:inline-flex;align-items:center;gap:9px;font-family:'Space Mono',monospace;font-weight:700;font-size:13.5px;background:#25D366;color:#fff;padding:13px 26px;border-radius:30px;box-shadow:0 10px 26px rgba(37,211,102,0.3);text-decoration:none;transition:transform .15s ease;}
+  .support-btn:hover{transform:translateY(-2px);}
   .support-btn svg{width:16px;height:16px;fill:#fff;}
 
   footer{padding:30px 0 40px;text-align:center;border-top:1px solid var(--line);margin-top:20px;}
@@ -99,6 +111,7 @@
     .step-row{grid-template-columns:1fr;}
     .mat-grid{grid-template-columns:1fr;}
     .hero-confirm{padding:44px 0 30px;}
+    .mat-card{padding:14px 16px;}
   }
 </style>
 <script>
@@ -125,7 +138,7 @@
     </div>
     <div class="eyebrow">Compra confirmada</div>
     <h1>Sua Bíblia <em>Mundo Colorido</em> já está pronta pra você.</h1>
-    <p>Recebemos seu pagamento com sucesso! Confira abaixo o passo a passo para acessar todos os 5 bônus exclusivos.</p>
+    <p>Recebemos seu pagamento com sucesso! Confira abaixo todos os 5 bônus exclusivos para baixar.</p>
     <div class="order-chip">
       ✓ Recibo enviado para <b>seu e-mail de compra</b>
     </div>
@@ -148,7 +161,7 @@
       <div class="step-box">
         <div class="num">02</div>
         <h3>Baixe os materiais</h3>
-        <p>Clique nos botões abaixo para baixar a Bíblia e os 5 bônus diretamente nesta página.</p>
+        <p>Clique nos botões abaixo para baixar a Bíblia e os 5 bônus diretamente desta página.</p>
       </div>
       <div class="step-box">
         <div class="num">03</div>
@@ -165,76 +178,112 @@
     <div class="section-head">
       <div class="eyebrow">Seu kit completo</div>
       <h2>Seus 5 bônus exclusivos.</h2>
+      <p style="color:var(--ink-mute);font-size:14px;margin-top:8px;">Clique em "Baixar" para cada material. Os desenhos para colorir estão em uma pasta com mais de 50 imagens!</p>
     </div>
     <div class="mat-grid">
 
+      <!-- Bônus 1: Desenhos para Colorir -->
       <div class="mat-card">
-        <div class="mat-icon" style="background:rgba(245,158,11,0.12);">
-          <svg viewBox="0 0 24 24" stroke="#f59e0b"><path d="M12 3a6 6 0 000 18 9 9 0 010-18z"/></svg>
+        <div class="mat-header">
+          <div class="mat-icon" style="background:rgba(124,58,237,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#7c3aed"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8M8 12h6M8 16h4"/></svg>
+          </div>
+          <div class="mat-info">
+            <span class="tag principal">★ Bônus 1</span>
+            <h4>Desenhos para Colorir</h4>
+            <p>50+ ilustrações bíblicas para colorir</p>
+          </div>
         </div>
-        <div class="mat-info">
-          <span class="tag">Bônus 1</span>
-          <h4>Histórias para Dormir</h4>
-          <p>Narrativas calmas para a hora de dormir</p>
+        <div class="mat-preview">
+          <img src="amostra.png" alt="Desenhos para Colorir" style="object-fit:cover;width:100%;height:100%;" onerror="this.parentElement.innerHTML='<div class=placeholder><svg viewBox=0 0 24 24 stroke=currentColor><rect x=2 y=4 width=20 height=16 rx=2/><path d=M8 8h8M8 12h6M8 16h4/></svg><span>50+ desenhos</span></div>'">
         </div>
-        <a href="https://drive.google.com/drive/folders/1_KPXumqdanQLqvztE0YguOXMXzdCFvbi?usp=drive_link" target="_blank" rel="noopener" class="mat-download" aria-label="Baixar Histórias para Dormir">
-          <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+        <a href="https://github.com/DescobertaLTDA/mundocolorido/tree/main/desenhos/desenhos_para_colorir" target="_blank" rel="noopener" class="mat-download-btn secundario">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M8 4v16"/></svg>
+          Ver todos os desenhos
         </a>
       </div>
 
+      <!-- Bônus 2: Histórias para Dormir -->
       <div class="mat-card">
-        <div class="mat-icon" style="background:rgba(52,211,153,0.12);">
-          <svg viewBox="0 0 24 24" stroke="#34d399"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <div class="mat-header">
+          <div class="mat-icon" style="background:rgba(245,158,11,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#f59e0b"><path d="M12 3a6 6 0 000 18 9 9 0 010-18z"/></svg>
+          </div>
+          <div class="mat-info">
+            <span class="tag">Bônus 2</span>
+            <h4>Histórias para Dormir</h4>
+            <p>Narrativas calmas para a hora de dormir</p>
+          </div>
         </div>
-        <div class="mat-info">
-          <span class="tag">Bônus 2</span>
-          <h4>Jogo da Memória</h4>
-          <p>Personagens bíblicos para brincar em família</p>
+        <div class="mat-preview">
+          <img src="amostra.png" alt="Histórias para Dormir" style="object-fit:cover;width:100%;height:100%;" onerror="this.parentElement.innerHTML='<div class=placeholder><svg viewBox=0 0 24 24 stroke=currentColor><path d=M12 3a6 6 0 000 18 9 9 0 010-18z/></svg><span>PDF</span></div>'">
         </div>
-        <a href="https://drive.google.com/drive/folders/1vTHF60xcASCgrlvIcx3zMOENgORoXQXt?usp=drive_link" target="_blank" rel="noopener" class="mat-download" aria-label="Baixar Jogo da Memória">
+        <a href="https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/historias_para_dormir/historias_dormir_crista.pdf" target="_blank" rel="noopener" class="mat-download-btn">
           <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+          Baixar PDF
         </a>
       </div>
 
+      <!-- Bônus 3: Jogo da Memória -->
       <div class="mat-card">
-        <div class="mat-icon" style="background:rgba(96,165,250,0.12);">
-          <svg viewBox="0 0 24 24" stroke="#60a5fa"><path d="M12 21c-4-3-8-6-8-11a5 5 0 0110-1 5 5 0 0110 1c0 5-4 8-8 11z"/></svg>
+        <div class="mat-header">
+          <div class="mat-icon" style="background:rgba(52,211,153,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#34d399"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          </div>
+          <div class="mat-info">
+            <span class="tag">Bônus 3</span>
+            <h4>Jogo da Memória</h4>
+            <p>Personagens bíblicos para brincar em família</p>
+          </div>
         </div>
-        <div class="mat-info">
-          <span class="tag">Bônus 3</span>
-          <h4>Orações para Crianças</h4>
-          <p>Orações simples na linguagem dos pequenos</p>
+        <div class="mat-preview">
+          <img src="amostra.png" alt="Jogo da Memória" style="object-fit:cover;width:100%;height:100%;" onerror="this.parentElement.innerHTML='<div class=placeholder><svg viewBox=0 0 24 24 stroke=currentColor><rect x=3 y=3 width=7 height=7 rx=1/><rect x=14 y=3 width=7 height=7 rx=1/><rect x=3 y=14 width=7 height=7 rx=1/><rect x=14 y=14 width=7 height=7 rx=1/></svg><span>PDF</span></div>'">
         </div>
-        <a href="https://drive.google.com/drive/folders/1YuEIyMXDb6Q7PaeYBmcLXOhS25QTdjCN?usp=drive_link" target="_blank" rel="noopener" class="mat-download" aria-label="Baixar Orações para Crianças">
+        <a href="https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/jogo_da_memoria/jogo-da-memoria-cristao-FINAL.pdf" target="_blank" rel="noopener" class="mat-download-btn">
           <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+          Baixar PDF
         </a>
       </div>
 
+      <!-- Bônus 4: Orações para Crianças -->
       <div class="mat-card">
-        <div class="mat-icon" style="background:rgba(251,146,60,0.12);">
-          <svg viewBox="0 0 24 24" stroke="#fb923c"><path d="M9 3H5a2 2 0 00-2 2v4M15 3h4a2 2 0 012 2v4M9 21H5a2 2 0 01-2-2v-4M15 21h4a2 2 0 002-2v-4"/></svg>
+        <div class="mat-header">
+          <div class="mat-icon" style="background:rgba(96,165,250,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#60a5fa"><path d="M12 21c-4-3-8-6-8-11a5 5 0 0110-1 5 5 0 0110 1c0 5-4 8-8 11z"/></svg>
+          </div>
+          <div class="mat-info">
+            <span class="tag">Bônus 4</span>
+            <h4>Orações para Crianças</h4>
+            <p>Orações simples na linguagem dos pequenos</p>
+          </div>
         </div>
-        <div class="mat-info">
-          <span class="tag">Bônus 4</span>
-          <h4>Quebra-Cabeça</h4>
-          <p>Monte cenas bíblicas e estimule a atenção</p>
+        <div class="mat-preview">
+          <img src="amostra.png" alt="Orações para Crianças" style="object-fit:cover;width:100%;height:100%;" onerror="this.parentElement.innerHTML='<div class=placeholder><svg viewBox=0 0 24 24 stroke=currentColor><path d=M12 21c-4-3-8-6-8-11a5 5 0 0110-1 5 5 0 0110 1c0 5-4 8-8 11z/></svg><span>PDF</span></div>'">
         </div>
-        <a href="https://drive.google.com/drive/folders/1F_Hw7p4uu5mdBMp7uZTi_CbdhKJwmfXO?usp=drive_link" target="_blank" rel="noopener" class="mat-download" aria-label="Baixar Quebra-Cabeça">
+        <a href="https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/oracoes_para_criancas/oracoes_criancas_pequenas.pdf" target="_blank" rel="noopener" class="mat-download-btn">
           <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+          Baixar PDF
         </a>
       </div>
 
+      <!-- Bônus 5: Quebra-Cabeça -->
       <div class="mat-card">
-        <div class="mat-icon" style="background:rgba(124,58,237,0.12);">
-          <svg viewBox="0 0 24 24" stroke="#7c3aed"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 8h8M8 12h6M8 16h4"/></svg>
+        <div class="mat-header">
+          <div class="mat-icon" style="background:rgba(251,146,60,0.12);">
+            <svg viewBox="0 0 24 24" stroke="#fb923c"><path d="M9 3H5a2 2 0 00-2 2v4M15 3h4a2 2 0 012 2v4M9 21H5a2 2 0 01-2-2v-4M15 21h4a2 2 0 002-2v-4"/></svg>
+          </div>
+          <div class="mat-info">
+            <span class="tag">Bônus 5</span>
+            <h4>Quebra-Cabeça</h4>
+            <p>Monte cenas bíblicas e estimule a atenção</p>
+          </div>
         </div>
-        <div class="mat-info">
-          <span class="tag">Bônus 5</span>
-          <h4>Ilustrações para Colorir</h4>
-          <p>Desenhos das histórias bíblicas para colorir</p>
+        <div class="mat-preview">
+          <img src="amostra.png" alt="Quebra-Cabeça" style="object-fit:cover;width:100%;height:100%;" onerror="this.parentElement.innerHTML='<div class=placeholder><svg viewBox=0 0 24 24 stroke=currentColor><path d=M9 3H5a2 2 0 00-2 2v4M15 3h4a2 2 0 012 2v4M9 21H5a2 2 0 01-2-2v-4M15 21h4a2 2 0 002-2v-4/></svg><span>PDF</span></div>'">
         </div>
-        <a href="https://drive.google.com/drive/folders/1o4uQj7GUQhLljfmRcZoFHwo4k_xTuaI_?usp=sharing" target="_blank" rel="noopener" class="mat-download" aria-label="Baixar Ilustrações para Colorir">
+        <a href="https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/quebra_cabeca/quebra_cabeca_metades.pdf" target="_blank" rel="noopener" class="mat-download-btn">
           <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+          Baixar PDF
         </a>
       </div>
 
@@ -247,7 +296,7 @@
   <div class="support-cta">
     <h3>Precisa de ajuda?</h3>
     <p>Se o material não chegou no seu e-mail ou você teve algum problema com o pagamento, fale com a gente agora.</p>
-    <a href="https://wa.me/" target="_blank" rel="noopener" class="support-btn">
+    <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="support-btn">
       <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2zm5.6 14.3c-.2.6-1.3 1.2-1.9 1.3-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.9-1.3-4.8-4.2-4.9-4.4-.1-.2-1.2-1.6-1.2-3s.7-2.1 1-2.4c.3-.3.6-.4.8-.4h.6c.2 0 .5 0 .7.5.3.6.9 2.1 1 2.2.1.2.1.4 0 .6-.4.8-.8.8-.5 1.3.9 1.6 1.8 2.2 3.2 2.9.2.1.4.1.5-.1.2-.2.7-.8.9-1.1.2-.3.4-.2.7-.1.3.1 1.8.9 2.1 1 .3.2.5.2.6.4.1.2.1.9-.1 1.5z"/></svg>
       Falar no WhatsApp
     </a>
@@ -255,7 +304,7 @@
 </section>
 
 <footer>
-  <p>© Mundo Colorido — Todos os direitos reservados. Dúvidas? <a href="mailto:contato@mundocolorido.com">contato@mundocolorido.com</a></p>
+  <p>© Mundo Colorido — Todos os direitos reservados. Dúvidas? <a href="mailto:descobertamental@gmail.com">descobertamental@gmail.com</a></p>
 </footer>
 
 </body>
