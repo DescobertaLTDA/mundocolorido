@@ -807,8 +807,9 @@
     </div>
 
     <div style="max-width:420px;margin:0 auto;position:relative;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);border:1px solid rgba(240,230,210,0.1);aspect-ratio:9/16;background:#000;">
-      <img class="book-video active" src="video_capa.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:1;transition:opacity .6s ease;">
-      <img class="book-video" src="video_paginas.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s ease;">
+      <video src="video_amostra.mp4" poster="video_capa.png" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;" controls playsinline preload="metadata">
+        Seu navegador não suporta vídeo HTML5.
+      </video>
     </div>
 
     <div style="max-width:420px;margin:20px auto 0;">
@@ -818,19 +819,6 @@
     </div>
   </div>
 </section>
-
-<script>
-(function(){
-  var vids = document.querySelectorAll('.book-video');
-  if (!vids.length) return;
-  var current = 0;
-  setInterval(function(){
-    vids[current].style.opacity = '0';
-    current = (current + 1) % vids.length;
-    vids[current].style.opacity = '1';
-  }, 5000);
-})();
-</script>
 
 <!-- ============ STRIP ============ -->
 <div class="strip">
