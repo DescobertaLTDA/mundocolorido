@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#7c3aed">
+<title>Galeria — Desenhos para Colorir</title>
+<link rel="icon" type="image/png" href="logo.png?v=2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#f5f0ff;
+    --bg-alt:#ede6ff;
+    --bg-alt2:#e8ddff;
+    --parchment:#fcfaff;
+    --parchment-dim:#f5edff;
+    --ink:#2d1b4e;
+    --ink-soft:#4a2d7a;
+    --ink-light:#1f0f3a;
+    --ink-mute:#6b4f9a;
+    --amethyst:#7c3aed;
+    --amethyst-deep:#5b21b6;
+    --amethyst-light:#a78bfa;
+    --citrino:#fbbf24;
+    --quartzo:#60a5fa;
+    --turmalina:#34d399;
+    --topazio:#fb923c;
+    --line:rgba(124,58,237,0.14);
+    --line-strong:rgba(124,58,237,0.24);
+    --shadow:0 20px 50px rgba(45,27,78,0.16);
+    --gold:#f59e0b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink-light);font-family:'Inter',sans-serif;line-height:1.6;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 28px;}
+
+  header{padding:18px 0;border-bottom:1px solid var(--line);background:rgba(245,240,255,0.9);backdrop-filter:blur(10px);position:sticky;top:0;z-index:10;}
+  .logo{font-family:'Fraunces',serif;font-weight:600;font-size:18px;display:flex;align-items:center;justify-content:center;gap:9px;color:var(--ink);}
+  .logo img{height:28px;width:auto;}
+
+  .page-header{text-align:center;padding:40px 0 24px;}
+  .page-header h1{font-family:'Fraunces',serif;font-size:clamp(28px,4vw,38px);color:var(--ink-light);}
+  .page-header h1 em{font-style:italic;background:linear-gradient(100deg,var(--amethyst),var(--amethyst-deep) 60%,var(--citrino));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .page-header p{color:var(--ink-mute);font-size:15px;margin-top:6px;}
+  .page-header .voltar{display:inline-flex;align-items:center;gap:6px;margin-top:14px;font-family:'Space Mono',monospace;font-size:12px;color:var(--amethyst);border:1px solid var(--line);padding:6px 16px;border-radius:20px;transition:background .15s ease;}
+  .page-header .voltar:hover{background:var(--bg-alt);}
+
+  .galeria-grid{display:grid;grid-template-columns:repeat(auto-fill, minmax(200px, 1fr));gap:16px;padding:10px 0 40px;}
+  .desenho-card{background:var(--parchment);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:transform .2s ease, box-shadow .2s ease;}
+  .desenho-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(45,27,78,0.12);}
+  .desenho-card .preview{width:100%;aspect-ratio:1/1;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .desenho-card .preview img{width:100%;height:100%;object-fit:cover;}
+  .desenho-card .preview .placeholder{color:var(--ink-mute);font-size:11px;text-align:center;padding:12px;}
+  .desenho-card .info{padding:10px 12px 12px;}
+  .desenho-card .info .nome{font-size:11px;font-weight:500;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:28px;line-height:1.3;}
+  .desenho-card .info .baixar{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:8px;padding:7px 12px;background:var(--amethyst);color:#fff;border-radius:8px;font-family:'Inter',sans-serif;font-weight:600;font-size:11px;border:none;cursor:pointer;transition:background .15s ease, transform .15s ease;}
+  .desenho-card .info .baixar:hover{background:var(--amethyst-deep);transform:translateY(-1px);}
+  .desenho-card .info .baixar svg{width:14px;height:14px;stroke:#fff;stroke-width:2.4;fill:none;flex-shrink:0;}
+
+  .contador{text-align:center;font-family:'Space Mono',monospace;font-size:12px;color:var(--ink-mute);padding:10px 0 20px;border-top:1px solid var(--line);}
+
+  @media (max-width:600px){
+    .galeria-grid{grid-template-columns:repeat(auto-fill, minmax(150px, 1fr));gap:12px;}
+    .desenho-card .info .nome{font-size:10px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo"><img src="logo.png?v=2" alt="Mundo Colorido">Mundo Colorido</div>
+</header>
+
+<section class="wrap">
+  <div class="page-header">
+    <h1>🎨 Desenhos para <em>Colorir</em></h1>
+    <p>Escolha um desenho e clique em "Baixar" para salvar no seu dispositivo.</p>
+    <a href="obrigado.html" class="voltar">← Voltar para o kit</a>
+  </div>
+
+  <div class="galeria-grid" id="galeria"></div>
+
+  <div class="contador" id="contador">Carregando...</div>
+</section>
+
+<script>
+  (function() {
+    // LISTA COMPLETA DOS DESENHOS (baseada nos arquivos que você enviou)
+    var desenhos = [
+      "01_Adam_and_Eve_in_Eden",
+      "02_God_creating_sky_and_stars",
+      "03_God_creating_ocean_and_fish",
+      "04_Animals_walking_into_Noahs_Ark",
+      "05_Noah_building_wooden_ark",
+      "06_Rainbow_over_ark_with_animals",
+      "07_Baby_Moses_floating_in_basket",
+      "08_Moses_as_shepherd_boy_guarding",
+      "09_Moses_kneeling_before_burning_bush",
+      "10_Moses_parting_Red_Sea",
+      "11_Moses_holding_Ten_Commandments",
+      "12_Shepherd_boy_playing_harp",
+      "13_Chibi_David_facing_Goliath",
+      "14_Daniel_sitting_with_lions",
+      "15_Jonah_swallowed_by_cute_whale",
+      "16_Jonah_praying_inside_whale",
+      "17_Jonah_preaching_to_Nineveh",
+      "18_Joseph_standing_with_brothers",
+      "19_Joseph_dreaming_with_wheat_sheaves",
+      "20_Ruth_walking_through_wheat_field",
+      "21_Angel_Gabriel_appearing_to_Mary",
+      "22_Mary_and_Joseph_traveling_to",
+      "23_Baby_Jesus_in_manger",
+      "24_Shepherds_looking_at_bright_star",
+      "25_Angels_singing_above_shepherds",
+      "26_Three_Wise_Men_riding_camels",
+      "27_Wise_men_presenting_gifts",
+      "28_Young_Jesus_talking_with_elders",
+      "30_Jesus_baptized_by_John",
+      "31_Jesus_choosing_twelve_disciples",
+      "32_Jesus_calming_storm_on_boat",
+      "33_Jesus_walking_on_water",
+      "34_Jesus_feeding_crowd_with_fish",
+      "35_Jesus_healing_blind_man",
+      "36_Jesus_healing_sick_girl",
+      "37_Jesus_welcoming_smiling_children",
+      "38_Shepherd_carrying_lost_lamb",
+      "39_Jesus_telling_Good_Samaritan_story",
+      "40_Father_welcoming_prodigal_son_home",
+      "41_Jesus_turning_water_into_wine",
+      "42_Zacchaeus_climbing_tree_for_Jesus",
+      "43_Jesus_raising_Lazarus_family_reu",
+      "44_Jesus_riding_donkey_into_Jerusalem",
+      "45_Jesus_and_disciples_at_table",
+      "46_Jesus_praying_in_garden",
+      "47_Jesus_carrying_cross_line_art",
+      "48_Empty_tomb_with_rolled_stone",
+      "49_Angel_sitting_by_empty_tomb",
+      "50_Jesus_appearing_to_Mary_Magdalene",
+      "51_Jesus_appearing_to_disciples",
+      "52_Jesus_ascending_to_heaven",
+      "53_Disciples_receiving_Holy_Spirit",
+      "54_Peter_and_John_healing_man",
+      "55_Traveler_on_boat_spreading_gospel",
+      "56_Early_Christians_praying_and_sha",
+      "57_Family_praying_together_at_dinner",
+      "58_Children_praying_in_bedroom",
+      "59_Noah_s_ark_rainbow_scene_illustr",
+      "60_Jesus_surrounded_by_children"
+    ];
+
+    var baseUrl = "https://raw.githubusercontent.com/DescobertaLTDA/mundocolorido/main/desenhos/desenhos_para_colorir/";
+    var galeria = document.getElementById('galeria');
+    var contador = document.getElementById('contador');
+
+    if (!galeria) return;
+
+    function nomeAmigavel(nome) {
+      return nome
+        .replace(/_/g, ' ')
+        .replace(/\d+_/g, '')
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    desenhos.forEach(function(nome) {
+      var card = document.createElement('div');
+      card.className = 'desenho-card';
+
+      var nomeArquivo = nome + '.jpeg';
+      var urlImagem = baseUrl + nomeArquivo;
+      var nomeExibicao = nomeAmigavel(nome);
+
+      card.innerHTML = `
+        <div class="preview">
+          <img src="${urlImagem}" alt="${nomeExibicao}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=placeholder>🖼️<br>${nomeExibicao}</div>'">
+        </div>
+        <div class="info">
+          <div class="nome">${nomeExibicao}</div>
+          <a href="${urlImagem}" download="${nomeArquivo}" target="_blank" rel="noopener" class="baixar">
+            <svg viewBox="0 0 24 24"><path d="M12 3v13m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
+            Baixar
+          </a>
+        </div>
+      `;
+
+      galeria.appendChild(card);
+    });
+
+    if (contador) {
+      contador.textContent = '📚 ' + desenhos.length + ' desenhos disponíveis para baixar';
+    }
+  })();
+</script>
+
+</body>
+</html>
